@@ -1,0 +1,15 @@
+[package]
+name = "jito-block-engine"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+clap = { version = "3.1.12", features = ["derive", "env"] }
+env_logger = "0.9.3"
+jito-searcher = { path = "../searcher" }
+jito-validator = { path = "../validator" }
+jito-protos = { path = "../jito_protos" }
+tokio = { version = "1.21.2", features = ["rt-multi-thread", "macros", "sync", "time"] }
+log = "0.4.17"
+tonic = "0.5.2"
