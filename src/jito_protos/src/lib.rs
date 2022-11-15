@@ -1,3 +1,6 @@
+use bincode::serialize;
+use solana_sdk::transaction::VersionedTransaction;
+
 pub mod auth {
     tonic::include_proto!("auth");
 }
@@ -28,4 +31,20 @@ pub mod searcher {
 
 pub mod shared {
     tonic::include_proto!("shared");
+}
+
+/// Converts a VersionedTransaction to a protobuf packet
+pub fn proto_packet_from_versioned_tx(tx: &VersionedTransaction) -> packet::Packet {
+    let data = serialize(tx).expect("serializes");
+    let size = data.len() as u64;
+    packet::Packet {
+        data,
+        meta: Some(packet::Meta {
+            size,
+            addr: "".to_string(),
+            port: 0,
+            flags: None,
+            sender_stake: 0,
+        }),
+    }
 }

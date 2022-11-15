@@ -45,7 +45,7 @@ impl SearcherService for SearcherServiceImpl {
             uuid: uuid.clone(),
         };
 
-        info!("received bundle_uuid: {:?}", bundle_uuid);
+        info!("received bundle_uuid: {:?}", bundle_uuid.uuid);
 
         if bundle_uuid.bundle.is_some() {
             self.bundle_sender

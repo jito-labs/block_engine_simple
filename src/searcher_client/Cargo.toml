@@ -1,14 +1,17 @@
 [package]
-name = "jito-searcher"
+name = "jito-searcher-client"
 version = "0.1.0"
 edition = "2021"
 publish = false
 
 [dependencies]
+clap = { version = "3.1.12", features = ["derive", "env"] }
 jito-protos = { path = "../jito_protos" }
+env_logger = "0.9.3"
 log = "0.4.17"
-prost-types = "0.11.2"
+prost-types = "0.8.0"
 solana-sdk = "1.14.5"
+solana-client = "1.14.7"
 tokio = "1.21.2"
 tokio-stream = "0.1.0"
 tonic = "0.5.2"

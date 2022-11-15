@@ -6,3 +6,10 @@ publish = false
 
 [dependencies]
 jito-protos = { path = "../jito_protos" }
+log = "0.4.17"
+prost-types = "0.11.2"
+solana-sdk = "1.14.5"
+tokio = "1.21.2"
+tokio-stream = "0.1.0"
+tonic = "0.5.2"
+uuid = { version = "1.2.2", features = ["v4"] }

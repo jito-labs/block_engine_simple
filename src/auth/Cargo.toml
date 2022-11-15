@@ -1,5 +1,5 @@
 [package]
-name = "jito-searcher"
+name = "jito-auth"
 version = "0.1.0"
 edition = "2021"
 publish = false
@@ -7,7 +7,7 @@ publish = false
 [dependencies]
 jito-protos = { path = "../jito_protos" }
 log = "0.4.17"
-prost-types = "0.11.2"
+prost-types = "0.8.0"
 solana-sdk = "1.14.5"
 tokio = "1.21.2"
 tokio-stream = "0.1.0"
