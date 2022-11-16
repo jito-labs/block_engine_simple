@@ -11,7 +11,7 @@ This is a half-baked block engine. It can be used for testing bundles running th
 ## Running
 ### Startup the block engine:
 ```bash
-cargo b --release && RUST_LOG=info ./target/release/jito-block-engine --searcher-addr 0.0.0.0:1234 --validator-addr 0.0.0.0:1235
+cargo b --release && RUST_LOG=info ./target/release/jito-block-engine
 ```
 
 ### Startup the validator (jito-solana):
