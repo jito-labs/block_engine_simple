@@ -19,9 +19,9 @@ impl AuthServiceImpl {
 impl AuthService for AuthServiceImpl {
     async fn generate_auth_challenge(
         &self,
-        _req: Request<GenerateAuthChallengeRequest>,
+        req: Request<GenerateAuthChallengeRequest>,
     ) -> Result<Response<GenerateAuthChallengeResponse>, Status> {
-        info!("generate_auth_challenge");
+        info!("AuthService::generate_auth_challenge called from {:?}", req.remote_addr());
         Ok(Response::new(GenerateAuthChallengeResponse {
             challenge: "generate_auth_challenge".into(),
         }))
@@ -29,9 +29,9 @@ impl AuthService for AuthServiceImpl {
 
     async fn generate_auth_tokens(
         &self,
-        _req: Request<GenerateAuthTokensRequest>,
+        req: Request<GenerateAuthTokensRequest>,
     ) -> Result<Response<GenerateAuthTokensResponse>, Status> {
-        info!("generate_auth_tokens");
+        info!("AuthService::generate_auth_tokens called from {:?}", req.remote_addr());
 
         let expiration_time = SystemTime::now()
             .add(Duration::from_secs(24 * 60 * 60))
@@ -58,9 +58,9 @@ impl AuthService for AuthServiceImpl {
 
     async fn refresh_access_token(
         &self,
-        _req: Request<RefreshAccessTokenRequest>,
+        req: Request<RefreshAccessTokenRequest>,
     ) -> Result<Response<RefreshAccessTokenResponse>, Status> {
-        info!("refresh_access_token");
+        info!("AuthService::refresh_access_token called from {:?}", req.remote_addr());
 
         let expiration_time = SystemTime::now()
             .add(Duration::from_secs(30 * 60))

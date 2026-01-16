@@ -2,7 +2,8 @@ use jito_protos::packet::PacketBatch;
 use jito_protos::{
     block_engine::{
         block_engine_validator_server::BlockEngineValidator, BlockBuilderFeeInfoRequest,
-        BlockBuilderFeeInfoResponse, SubscribeBundlesRequest, SubscribeBundlesResponse,
+        BlockBuilderFeeInfoResponse, GetBlockEngineEndpointRequest,
+        GetBlockEngineEndpointResponse, SubscribeBundlesRequest, SubscribeBundlesResponse,
         SubscribePacketsRequest, SubscribePacketsResponse,
     },
     bundle::BundleUuid,
@@ -216,5 +217,12 @@ impl BlockEngineValidator for ValidatorServerImpl {
             pubkey: Pubkey::default().to_string(),
             commission: 5,
         }))
+    }
+
+    async fn get_block_engine_endpoints(
+        &self,
+        _request: Request<GetBlockEngineEndpointRequest>,
+    ) -> Result<Response<GetBlockEngineEndpointResponse>, Status> {
+        unimplemented!()
     }
 }

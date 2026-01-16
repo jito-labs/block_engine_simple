@@ -1,9 +1,10 @@
-use jito_protos::bundle::BundleUuid;
+use jito_protos::bundle::{BundleResult, BundleUuid};
 use jito_protos::searcher::{
-    searcher_service_server::SearcherService, ConnectedLeadersRequest, ConnectedLeadersResponse,
-    GetTipAccountsRequest, GetTipAccountsResponse, NextScheduledLeaderRequest,
-    NextScheduledLeaderResponse, PendingTxNotification, PendingTxSubscriptionRequest,
-    SendBundleRequest, SendBundleResponse,
+    searcher_service_server::SearcherService, ConnectedLeadersRegionedRequest,
+    ConnectedLeadersRegionedResponse, ConnectedLeadersRequest, ConnectedLeadersResponse,
+    GetRegionsRequest, GetRegionsResponse, GetTipAccountsRequest, GetTipAccountsResponse,
+    NextScheduledLeaderRequest, NextScheduledLeaderResponse, SendBundleRequest, SendBundleResponse,
+    SubscribeBundleResultsRequest,
 };
 use log::info;
 use tokio::sync::mpsc::Sender;
@@ -26,12 +27,12 @@ impl SearcherServiceImpl {
 
 #[tonic::async_trait]
 impl SearcherService for SearcherServiceImpl {
-    type SubscribePendingTransactionsStream = ReceiverStream<Result<PendingTxNotification, Status>>;
+    type SubscribeBundleResultsStream = ReceiverStream<Result<BundleResult, Status>>;
 
-    async fn subscribe_pending_transactions(
+    async fn subscribe_bundle_results(
         &self,
-        _request: Request<PendingTxSubscriptionRequest>,
-    ) -> Result<Response<Self::SubscribePendingTransactionsStream>, Status> {
+        _request: Request<SubscribeBundleResultsRequest>,
+    ) -> Result<Response<Self::SubscribeBundleResultsStream>, Status> {
         unimplemented!()
     }
 
@@ -39,6 +40,8 @@ impl SearcherService for SearcherServiceImpl {
         &self,
         request: Request<SendBundleRequest>,
     ) -> Result<Response<SendBundleResponse>, Status> {
+        info!("SearcherService::send_bundle called from {:?}", request.remote_addr());
+
         let uuid = Uuid::new_v4().to_string();
         let bundle_uuid = BundleUuid {
             bundle: request.into_inner().bundle,
@@ -71,10 +74,24 @@ impl SearcherService for SearcherServiceImpl {
         unimplemented!()
     }
 
+    async fn get_connected_leaders_regioned(
+        &self,
+        _request: Request<ConnectedLeadersRegionedRequest>,
+    ) -> Result<Response<ConnectedLeadersRegionedResponse>, Status> {
+        unimplemented!()
+    }
+
     async fn get_tip_accounts(
         &self,
         _request: Request<GetTipAccountsRequest>,
     ) -> Result<Response<GetTipAccountsResponse>, Status> {
+        unimplemented!()
+    }
+
+    async fn get_regions(
+        &self,
+        _request: Request<GetRegionsRequest>,
+    ) -> Result<Response<GetRegionsResponse>, Status> {
         unimplemented!()
     }
 }

@@ -13,4 +13,5 @@ jito-searcher = { path = "../searcher" }
 jito-validator = { path = "../validator" }
 log = "0.4.17"
 tokio = { version = "1.21.2", features = ["rt-multi-thread", "macros", "sync", "time"] }
+tokio-stream = "0.1"
 tonic = "0.5.2"
